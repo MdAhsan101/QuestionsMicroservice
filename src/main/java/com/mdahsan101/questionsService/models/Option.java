@@ -1,8 +1,8 @@
 package com.mdahsan101.questionsService.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @Table(name="options_table")
 @NoArgsConstructor
 @Data
-public class Options {
+public class Option {
 
-    public Options(Integer optionNumber, String optionDescription) {
+    public Option(Integer optionNumber, String optionDescription) {
         this.optionNumber = optionNumber;
         this.optionDescription = optionDescription;
     }
@@ -21,7 +21,6 @@ public class Options {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    @NotEmpty
     public Integer optionNumber;
 
     @NotEmpty
@@ -29,6 +28,7 @@ public class Options {
 
     @ManyToOne
     @JoinColumn(name="qId")
+    @JsonIgnore
     public Question question;
 
     @Override

@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Question {
 
-    public Question(List<Options> options, String qDescription, @Nullable String qCategory, Integer qMarks, Integer answer) {
+    public Question(List<Option> options, String qDescription, @Nullable String qCategory, Integer qMarks, Integer answer) {
         this.options = options;
         this.qDescription = qDescription;
         this.qCategory = qCategory;
@@ -30,7 +30,7 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(min=2,max=2)
     @NotEmpty
-    public List<Options> options;
+    public List<Option> options;
 
     @Column(name = "description")
     @NotEmpty
@@ -43,12 +43,10 @@ public class Question {
     @Column(name="marks")
     @Min(1)
     @Max(5)
-    @NotEmpty
     public Integer qMarks;
 
     @Min(1)
     @Max(2)
-    @NotEmpty
     public Integer answer;
 
     @Override

@@ -1,6 +1,6 @@
 package com.mdahsan101.questionsService.DTO;
 
-import com.mdahsan101.questionsService.models.Options;
+import com.mdahsan101.questionsService.models.Option;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class QuestionDTO {
     Integer qId;
-    List<Options> options;
+    List<Option> options;
     String qDescription;
     String qCategory;
     Integer qMarks;
