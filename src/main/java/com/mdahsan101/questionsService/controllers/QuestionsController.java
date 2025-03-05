@@ -44,4 +44,22 @@ public class QuestionsController
         }
         return ResponseEntity.status(HttpStatus.OK).body(dbVal);
     }
+
+    @GetMapping(value = "/getQuestionIds/{cat}/{noq}")
+    public ResponseEntity<List<Integer>> getQuestionIds(@PathVariable("cat") String category, @PathVariable("noq") Integer num_of_ques){
+        List<Integer> ques_ids= dbService.getQuestionIdsFromDB(category,num_of_ques);
+        if(ques_ids==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(ques_ids);
+    }
+
+    @PostMapping(value = "/getQuestionsWithIds")
+    public ResponseEntity<List<Question>> getQuestionsUsingIds(@RequestBody List<Integer> ques_ids){
+        List<Question> questionList= dbService.getQuestionsUsingIdsFromDB(ques_ids);
+        if(questionList==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(questionList);
+    }
 }

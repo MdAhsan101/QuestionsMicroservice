@@ -38,6 +38,20 @@ public class DBService
         return dtoLst;
     }
 
+    public List<Integer> getQuestionIdsFromDB(String ct, int noq){
+        Optional<List<Integer>> optional_list_ids= questionsRepository.findByCategoryWithLimitInRandomOrder(ct,noq);
+        return optional_list_ids.orElse(null);
+    }
+
+    public List<Question> getQuestionsUsingIdsFromDB(List<Integer> qids){
+        List<Question> quesList= new ArrayList<>();
+        for(int qid: qids){
+            Optional<Question> opt_ques= questionsRepository.findByqId(qid);
+            opt_ques.ifPresent(quesList::add);
+        }
+        return quesList;
+    }
+
     private QuestionDTO convertQuestionToDTO(Question ques){
         return  new QuestionDTO(
                 ques.getQId(),
